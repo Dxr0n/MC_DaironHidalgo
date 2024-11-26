@@ -30,4 +30,4 @@ function mostrarUsuarios($usuarios){
 }
 ?>
 
-<link rel="stylesheet" href="<?php echo get_UrlBase('css/style-verdatos.css')?>">
+<link rel="stylesheet" href="<?php echo get_UrlBase('css/style-vistaUsuario.css')?>">
