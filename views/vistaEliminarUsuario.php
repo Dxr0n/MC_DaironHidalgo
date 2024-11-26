@@ -40,7 +40,7 @@ function mostrarFormularioEliminar($mensaje = '', $usuario = null) {
         <?php } ?>
     </div>
 
-    <link rel="stylesheet" href="<?php echo get_UrlBase('css/style-eliminardatos.css'); ?>">
+    <link rel="stylesheet" href="<?php echo get_UrlBase('css/style-eliminarUsuario.css'); ?>">
     <link rel="stylesheet" href="<?php echo get_UrlBase('css/style-mensaje-emergente.css'); ?>">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script> 
     <script src="<?php echo get_UrlBase('js/modelo-mensaje-emergente.js'); ?>"></script>
