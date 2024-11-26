@@ -155,6 +155,9 @@
           </div>
           <div class="form-inp">
             <input type="password" name="txtpassword"  id="txtpassword" placeholder="Password" required>
+            <span id="toggle-clave" class="toggle-clave">
+            <img src="" id="icono-Ojo" alt="icono-Ojo" data-src="img/icono-ojo-abierto.svg">
+          </span>
           </div>
         </div>
         <div id="submit-button-cvr">
@@ -167,6 +170,7 @@
 
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script src="<?php echo get_UrlBase("js/modelo-carga.js")?>"></script>
+  <script src="<?php echo get_UrlBase("js/modelo-mostrar-clave.js")?>"></script>
 
 </body>
 </html>
