@@ -26,7 +26,7 @@ function mostrarFormularioIngreso($mensaje){
 <?php
 }
 ?>
-<link rel="stylesheet" href="<?php echo get_UrlBase('css/style-ingresardatos.css'); ?>"> 
+<link rel="stylesheet" href="<?php echo get_UrlBase('css/style-ingresarUsuario.css'); ?>"> 
 <link rel="stylesheet" href="<?php echo get_UrlBase('css/style-mensaje-emergente.css'); ?>">
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script> 
 <script src="<?php echo get_UrlBase('js/modelo-mensaje-emergente.js'); ?>"></script>
