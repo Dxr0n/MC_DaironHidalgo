@@ -88,6 +88,7 @@ body {
 
 #input-area {
   margin-top: 40px;
+  position: relative;
 }
 
 .form-inp {
@@ -185,6 +186,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#toggle-clave {
+  position: absolute;
+  right: 10px;
+  top: 80%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+#icono-Ojo {
+  width: 20px;
+  height: 20px;
 }
 
 .pelota-basquet, .pelota-futbol, .pelotas, .pelota-tenis, .pelota-voley, .pelota-voley-1,
