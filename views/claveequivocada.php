@@ -27,6 +27,6 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="<?php echo get_UrlBase("js/modelo-carga.js")?>"></script>
+    <script src="<?php echo get_js("modelo-carga.js")?>"></script>
 </body>
 </html>
