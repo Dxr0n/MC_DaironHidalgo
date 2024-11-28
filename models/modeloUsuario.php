@@ -8,6 +8,14 @@ class modeloUsuario{
         $this->conexion = Conexion::obtenerconexion();
     }
 
+    public function ingresarLogin($username) {
+        $query = "SELECT username, password FROM usuarios WHERE BINARY username = :username LIMIT 1";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function obtenerUsuarios(){
         $query = $this->conexion->query('SELECT id, username, password, perfil FROM usuarios');
         return $query->fetchAll(PDO::FETCH_ASSOC);
