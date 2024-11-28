@@ -66,11 +66,12 @@ body {
   padding: 0;
 }
 
-.menu ul li {
-  margin: 20px 0;
-  align-items: center;
-  justify-content: center;
-}
+.menu ul li { 
+  padding: 10px; 
+  height: 40px;
+  display: flex; 
+  align-items: center; 
+} 
 
 .menu ul li a {
   color: white;
