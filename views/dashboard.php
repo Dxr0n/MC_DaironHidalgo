@@ -1,13 +1,6 @@
 <?php
-    session_start();
-
-    if (!isset($_SESSION["txtusername"])) {
-        header("Location: ".get_UrlBase('index.php'));
-        exit();
-    }
-    
-    require_once $_SERVER['DOCUMENT_ROOT'].'/etc/config.php';
-?>
+function mostrarDashboard($argumento) {
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,33 +30,8 @@
         </ul>
     </div>
     <div class="contenido">
-        <?php
-            if (isset($_GET["opcion"])) {
-                $opcion = $_GET["opcion"];
-
-                switch ($opcion){
-                    case 'Inicio':
-                        echo "<h3>Bienvenido al Dashboard</h3>";
-                        echo "<p>Selecciona una opción para comenzar.</p>";
-                        break;
-                    case 'Ver':
-                        echo "<h3>Sección de Ver</h3>";
-                        echo "<iframe src ='".get_controllers("controladorUsuario.php") ."'> </iframe>";
-                        break;
-                    case 'Ingresar':
-                        echo "<h3>Sección de Ingresar</h3>";
-                        echo "<iframe src ='".get_controllers("controladorIngresarUsuario.php") ."'> </iframe>";
-                        break; 
-                    case 'Modificar':
-                        echo "<h3>Sección de Modificar</h3>";
-                        echo "<iframe src ='".get_controllers("controladorModificarUsuario.php") ."'> </iframe>";
-                        break;
-                    case 'Eliminar':
-                        echo "<h3>Sección de Eliminar</h3>";
-                        echo "<iframe src ='".get_controllers("controladorEliminarUsuario.php") ."'> </iframe>";
-                        break;
-                }
-            }
+        <?php 
+            echo $argumento; 
         ?>
     </div>
 
@@ -71,3 +39,7 @@
     <script src="<?php echo get_UrlBase("js/modelo-carga.js")?>"></script>
 </body>
 </html>
+
+<?php
+}
+?>
