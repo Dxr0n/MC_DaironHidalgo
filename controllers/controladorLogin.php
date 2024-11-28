@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header('Location: ' . get_controllers('controladorDashboard.php'));
             exit;
         } else {
-            header('Location: ' . get_views('claveequivocada.php'));
+            header('Location: ' . get_views('vistaClaveequivocada.php'));
             exit;
         }
 } else {
