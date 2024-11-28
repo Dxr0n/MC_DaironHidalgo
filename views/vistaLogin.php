@@ -104,7 +104,8 @@
                     <div class="form-inp">
                         <input type="password" name="txtpassword" id="txtpassword" placeholder="Password" required>
                         <span id="toggle-clave" class="toggle-clave">
-                            <img src="<?php echo get_UrlBase('img/icono-ojo-abierto.svg')?>" alt="Mostrar clave" id="icono-Ojo">
+                        <img data-src="<?php echo get_UrlBase('img/icono-ojo-abierto-clave.svg'); ?>"
+                        data-closed=" <?php echo get_UrlBase('img/icono-ojo-cerrado-clave.svg'); ?>" alt="Mostrar clave" id="icono-Ojo">
                         </span>
                     </div>
                 </div>
