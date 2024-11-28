@@ -1,5 +1,6 @@
 $(document).ready(function() {
-  $('#icono-Ojo').attr('src', $('#icono-Ojo').data('src'));
+  var eyeIconSrc = $('#icono-Ojo').data('src');
+  $('#icono-Ojo').attr('src', eyeIconSrc);
 
   $('#toggle-clave').on('click', function() {
     var passwordField = $('#txtpassword');
@@ -7,10 +8,10 @@ $(document).ready(function() {
 
     if (passwordField.attr('type') === 'password') {
       passwordField.attr('type', 'text');
-      eyeIcon.attr('src', 'img/icono-ojo-cerrado.svg'); 
+      eyeIcon.attr('src', eyeIcon.data('closed'));
     } else {
       passwordField.attr('type', 'password');
-      eyeIcon.attr('src', 'img/icono-ojo-abierto.svg');  
+      eyeIcon.attr('src', eyeIcon.data('src'));
     }
   });
 });
