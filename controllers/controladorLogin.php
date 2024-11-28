@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($user && $v_password === $user['password']) {
             $_SESSION["txtusername"] = $v_username;
-            header('Location: ' . get_controllers('controladorDashboard.php'));
+            header('Location: ' . get_controllers('controladorDashboard.php?opcion=Inicio'));
             exit;
         } else {
             header('Location: ' . get_views('vistaClaveequivocada.php'));
