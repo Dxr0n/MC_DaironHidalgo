@@ -1,19 +1,27 @@
-$(document).ready(function () {
-    let activeLink = null; 
-    $('.menu a').on('click', function (e) {
-        e.preventDefault();
-        const clickedLink = $(this); 
-        const icon = clickedLink.find('.menu-icon'); 
+document.addEventListener('DOMContentLoaded', function () {
+    let activeLink = null;
 
-        $('.menu-icon').each(function () {
-            const resetIcon = $(this);
-            resetIcon.attr('src', resetIcon.data('default-src'));
+    const menuLinks = document.querySelectorAll('.menu a');
+
+    menuLinks.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const clickedLink = this; 
+            const icon = clickedLink.querySelector('.menu-icon');  
+
+            const allIcons = document.querySelectorAll('.menu-icon');
+            allIcons.forEach(function (resetIcon) {
+                resetIcon.setAttribute('src', resetIcon.getAttribute('data-default-src'));
+            });
+
+            if (icon) {
+                icon.setAttribute('src', icon.getAttribute('data-alt-src'));
+            }
+
+            activeLink = clickedLink;
+
+            window.location.href = clickedLink.getAttribute('href');
         });
-
-        icon.attr('src', icon.data('alt-src'));
-
-        activeLink = clickedLink;
-
-        window.location.href = clickedLink.attr('href');
     });
 });
