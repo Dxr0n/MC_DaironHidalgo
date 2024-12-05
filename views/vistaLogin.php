@@ -1,5 +1,5 @@
 <?php
-    function mostrarLogin(){
+require_once $_SERVER['DOCUMENT_ROOT'] . '/etc/config.php';
 ?>
 
 <!DOCTYPE html>
@@ -117,12 +117,8 @@
         </form>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="<?php echo get_js("modelo-verificacion-credenciales.js")?>"></script>
     <script src="<?php echo get_js("modelo-carga.js")?>"></script>
     <script src="<?php echo get_js("modelo-mostrar-clave.js")?>"></script>
 </body>
 </html>
-
-<?php
-  }
-?>
