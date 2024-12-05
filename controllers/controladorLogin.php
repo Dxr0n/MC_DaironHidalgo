@@ -2,7 +2,9 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/etc/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/models/modeloUsuario.php';
 
-session_start();
+if (session_status() == PHP_SESSION_NONE){
+    session_start();
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $v_username = $_POST["txtusername"] ?? '';
