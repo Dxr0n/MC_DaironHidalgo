@@ -1,6 +1,7 @@
 <?php
 function mostrarUsuarios($usuarios){
 ?>
+    <h2>Ver Usuarios</h2>
 
     <h2>LISTA DE USUARIOS DEL SISTEMA</h2>
     <br>
