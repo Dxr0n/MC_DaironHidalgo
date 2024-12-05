@@ -1,17 +1,19 @@
-$(document).ready(function() {
-  var eyeIconSrc = $('#icono-Ojo').data('src');
-  $('#icono-Ojo').attr('src', eyeIconSrc);
+document.addEventListener('DOMContentLoaded', function() {
+  var eyeIcon = document.getElementById('icono-Ojo');
+  var eyeIconSrc = eyeIcon.getAttribute('data-src');
+  eyeIcon.setAttribute('src', eyeIconSrc);
 
-  $('#toggle-clave').on('click', function() {
-    var passwordField = $('#txtpassword');
-    var eyeIcon = $('#icono-Ojo');
+  var toggleClave = document.getElementById('toggle-clave');
+  
+  toggleClave.addEventListener('click', function() {
+    var passwordField = document.getElementById('txtpassword');
 
-    if (passwordField.attr('type') === 'password') {
-      passwordField.attr('type', 'text');
-      eyeIcon.attr('src', eyeIcon.data('closed'));
+    if (passwordField.type === 'password') {
+      passwordField.type = 'text'; 
+      eyeIcon.setAttribute('src', eyeIcon.getAttribute('data-closed'));
     } else {
-      passwordField.attr('type', 'password');
-      eyeIcon.attr('src', eyeIcon.data('src'));
+      passwordField.type = 'password'; 
+      eyeIcon.setAttribute('src', eyeIcon.getAttribute('data-src')); 
     }
   });
 });
