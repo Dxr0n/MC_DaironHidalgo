@@ -12,7 +12,7 @@ function mostrarFormularioEditar($user_data = null, $mensaje = '') {
     <?php 
     if ($user_data){ 
     ?>
-        <form action="" method="POST" autocomplete="off">
+        <form action="<?php echo get_controllers('controladorModificarUsuario.php'); ?>" method="POST" autocomplete="off">
             <input type="hidden" name="id" value="<?php echo $user_data['id']; ?>">
 
             <label for="username">Usuario:</label>
@@ -31,9 +31,7 @@ function mostrarFormularioEditar($user_data = null, $mensaje = '') {
         </form>
 
     <?php 
-    } else {
-    echo '<p>Selecciona un usuario para editar.</p>';
-    }
+    } 
     ?>
 
 <?php 
@@ -66,7 +64,6 @@ function mostrarListaUsuarios($usuarios) {
 
 <link rel="stylesheet" href="<?php echo get_UrlBase('css/style-modificarUsuario.css'); ?>">
 <link rel="stylesheet" href="<?php echo get_UrlBase('css/style-mensaje-emergente.css'); ?>">
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="<?php echo get_js('modelo-mensaje-emergente.js'); ?>"></script>
 <?php
 }
