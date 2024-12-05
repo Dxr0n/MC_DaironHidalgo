@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE){
+    session_start();
+}
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/etc/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/models/modeloUsuario.php';
@@ -25,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['delete_id'])) {
 
     if ($delete_id === false) {
         $_SESSION['mensaje'] = 'Error: El ID debe ser un número positivo.';
-        header('Location: ' . get_urlBase('controllers/controladorEliminarUsuario.php'));
+        header('Location: ' . get_controllers('controladorEliminarUsuario.php'));
         exit();
     }
 }
