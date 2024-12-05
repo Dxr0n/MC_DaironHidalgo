@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $v_username = $_POST["txtusername"] ?? '';
     $v_password = $_POST["txtpassword"] ?? '';
 
-    $modelousuario = new modelousuario();
+    $modelousuario = new modeloUsuario();
     $user = $modelousuario->validarUsuarios($v_username, $v_password);
 
     if ($user && $v_password === $user['password']) {
