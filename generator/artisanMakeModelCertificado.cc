@@ -107,6 +107,9 @@ void processFile(const string &inputFileName, const string &outputFileName)
     outputFile << "    }" << endl;
     outputFile << "" << endl;
     outputFile << "    // debe hacer un metodo para hacer select" << endl;
+
+    //!Obtener
+
     outputFile << "    public function obtener" + nombreModelo + "()" << endl;
     outputFile << "    {" << endl;
     outputFile << "        $query = $this->conexion->query('select '." << endl;
@@ -120,51 +123,99 @@ void processFile(const string &inputFileName, const string &outputFileName)
     ifstream inputFile(inputFileName);
     string campos[150];
     contador = 0;
+
+    // Leer las líneas y almacenar los campos
     while (getline(inputFile, linea))
     {
         contador++;
         if ((contador > 2) && (contador < totallineas - 1))
         {
-
             string lineaCodigo = linea;
             lineaCodigo = trim(lineaCodigo);
             lineaCodigo = split(lineaCodigo, ' ', 0);
             campos[contador] = lineaCodigo;
-
-            lineaCodigo = "                                        '" + lineaCodigo + ",'.";
-            // Escribir las mitades en el archivo de salida
-            outputFile << lineaCodigo << endl;
         }
     }
-
-    //!ARREGLADO POR JUAN Y ALAN
     
-    outputFile << "                                        'from " + nombreModelo + "');" << endl;
+    // Generar el código con manejo de la última coma
+    for (int i = 3; i < contador; i++) // Ajuste del índice para ignorar cabeceras
+    {
+        string lineaCodigo;
+        if (i == contador - 2) // penutimo campo, sin coma
+        {
+            lineaCodigo = "'" + campos[i] + "'.";
+        } else if ( i == contador - 1)
+        {
+            break;
+        }
+        
+        else // Campos intermedios, con coma
+        {
+            lineaCodigo = "'" + campos[i] + ",'.";
+        } 
+        
+        outputFile << lineaCodigo << endl;
+    }
+
+    outputFile << "'from " + nombreModelo + "');" << endl;
     outputFile << "        return $query->fetchAll(PDO::FETCH_ASSOC);" << endl;
     outputFile << "    }" << endl;
     outputFile << "    " << endl;
 
-    outputFile << "    // debe hacer un metodo para hacer insert" << endl;
+    //!INSERTAR
 
+    outputFile << "    // debe hacer un metodo para hacer insert" << endl;
     outputFile << "    public function insertar" + nombreModelo + "(" << endl;
 
     for (int i = 3; i < contador - 1; i++)
     {
+        if (i == contador - 2) // penutimo campo, sin coma
+        {
+        outputFile << "    $" + campos[i] + "" << endl;
+        } else if ( i == contador - 1)
+        {
+            break;
+        }
+        
+        else // Campos intermedios, con coma
+        {
         outputFile << "    $" + campos[i] + "," << endl;
+        } 
     }
 
     outputFile << "    )" << endl;
     outputFile << "    {" << endl;
-    outputFile << "        $query = 'INSERT INTO usuarios('." << endl;
+    outputFile << "        $query = 'INSERT INTO " << nombreModelo << " ('." << endl;
     for (int i = 3; i < contador - 1; i++)
     {
+        
+        if (i == contador - 2) // penutimo campo, sin coma
+        {
+        outputFile << "                '" + campos[i] + "'." << endl;
+        } else if ( i == contador - 1)
+        {
+            break;
+        }
+        else // Campos intermedios, con coma
+        {
         outputFile << "                '" + campos[i] + ",'." << endl;
+        } 
     }
     outputFile << "                 ') VALUES( '." << endl;
 
     for (int i = 3; i < contador - 1; i++)
     {
-        outputFile << "                 ': " + campos[i] + ",'." << endl;
+        if (i == contador - 2) // penutimo campo, sin coma
+        {
+        outputFile << "                ':" + campos[i] + "'." << endl;
+        } else if ( i == contador - 1)
+        {
+            break;
+        }
+        else // Campos intermedios, con coma
+        {
+        outputFile << "                ':" + campos[i] + ",'." << endl;
+        } 
     }
 
     outputFile << "                  ') ';" << endl;
@@ -181,29 +232,27 @@ void processFile(const string &inputFileName, const string &outputFileName)
     outputFile << "        return $stmt->execute();" << endl;
     outputFile << "    }" << endl;
 
-    //! Descartado (JUAN)
-    // outputFile << "    public function eliminar" << nombreModelo << "($" << campos[0] << ")" << endl;
-    // outputFile << "    {" << endl;
-    // outputFile << "        try {" << endl;
-    // outputFile << "            $query = 'DELETE FROM " << nombreModelo << " WHERE " << campos[2] << " = :" << campos[2] << "';" << endl;
-    // outputFile << "            $stmt = $this->conexion->prepare($query);" << endl;
-    // outputFile << "            $stmt->bindParam(':" << campos[2] << "', $" << campos[2] << ");" << endl;
-    // outputFile << "            $stmt->execute();" << endl;
-    // outputFile << "            return $stmt->rowCount() > 0;" << endl;
-    // outputFile << "        } catch (PDOException $e) {" << endl;
-    // outputFile << "            throw new Exception('Error al eliminar " << nombreModelo << ": ' . $e->getMessage());" << endl;
-    // outputFile << "        }" << endl;
-    // outputFile << "    }" << endl;
 
     //?ObtenerUsuarioPorNombre (No existe ID en la tabla) (JUAN)
 
     outputFile << "    public function obtenerNombre" << nombreModelo << "($" << "NOMBRE" << ")" << endl;
     outputFile << "    {" << endl;
     outputFile << "        try {" << endl;
-    outputFile << "            $query = $this->conexion->prepare('SELECT " << campos[0];
+    outputFile << "            $query = $this->conexion->prepare('SELECT ";
     for (int i = 3; i < contador - 1; i++)
-    {
-        outputFile << ", " << campos[i];
+    {//!
+        if (i == contador - 2) // penutimo campo, sin coma
+        {
+        outputFile << "" + campos[i] + "";
+        } else if ( i == contador - 1)
+        {
+            break;
+        }
+        
+        else // Campos intermedios, con coma
+        {
+        outputFile << "" + campos[i] + ", ";
+        }
     }
     outputFile << " FROM " << nombreModelo << " WHERE " << campos[3] << " = ?');" << endl;
     outputFile << "            $query->execute([$" << campos[3] << "]);" << endl;
@@ -220,10 +269,17 @@ void processFile(const string &inputFileName, const string &outputFileName)
     outputFile << "    public function modificar" << nombreModelo << "(";
     for (int i = 3; i < contador - 1; i++)
     { // Iterar desde el segundo campo
-        outputFile << "$" << campos[i];
-        if (i < contador - 2)
-        { // Evitar coma después del último parámetro
-            outputFile << ", ";
+        if (i == contador - 2) // penutimo campo, sin coma
+        {
+        outputFile << "$" + campos[i] + "";
+        } else if ( i == contador - 1)
+        {
+            break;
+        }
+        
+        else // Campos intermedios, con coma
+        {
+        outputFile << "$" + campos[i] + ", ";
         }
     }
     outputFile << ")" << endl;
@@ -235,24 +291,28 @@ void processFile(const string &inputFileName, const string &outputFileName)
     {
         outputFile << campos[i] << " = ?";
         if (i < contador - 2)
-        { // Evitar coma después del último parámetro
-            outputFile << ", ";
-        }
-    }
-    outputFile << " WHERE " << campos[3] << " = ?');" << endl; // Asegúrate de que no haya espacios extra
-
-    outputFile << "            $query->execute([";
-    for (int i = 3; i < contador - 1; i++)
-    {
-        outputFile << "$" << campos[i];
-
-
-        if (i < contador - 2)
         { 
             outputFile << ", ";
         }
     }
-    outputFile << ", $" << campos[0] << "]);" << endl;
+    outputFile << " WHERE " << campos[3] << " = ?');" << endl; 
+
+    outputFile << "            $query->execute([";
+    for (int i = 3; i < contador - 1; i++)
+    {
+        if (i == contador - 1) // penutimo campo, sin coma
+        {
+            break;
+        } else if ( i == contador - 2)
+        {
+            outputFile << "$" + campos[i] + "";
+        }
+        else // Campos intermedios, con coma
+        {
+        outputFile << "$" + campos[i] + ", ";
+        }
+    }
+    outputFile <<"]);" << endl;
 
     outputFile << "            return $query->rowCount() > 0;" << endl;
     outputFile << "        } catch (PDOException $e) {" << endl;
@@ -287,7 +347,24 @@ void processFile(const string &inputFileName, const string &outputFileName)
 
     //! Validar (ALAN)
 
-    outputFile << "    public function validar" + nombreModelo + "($username, $password)" << endl;
+    outputFile << "    public function validar" + nombreModelo + "(";
+    for (int i = 3; i < contador - 1; i++)
+    { // Iterar desde el segundo campo
+        if (i == contador - 2) // penutimo campo, sin coma
+        {
+        outputFile << "$" + campos[i] + "";
+        } else if ( i == contador - 1)
+        {
+            break;
+        }
+        
+        else // Campos intermedios, con coma
+        {
+        outputFile << "$" + campos[i] + ", ";
+        }
+    }
+    outputFile << ")" << endl;
+
     outputFile << "    {" << endl;
     outputFile << "        try {" << endl;
     outputFile << "            $query = $this->conexion->prepare('SELECT ";
@@ -300,7 +377,22 @@ void processFile(const string &inputFileName, const string &outputFileName)
         }
     }
     outputFile << " FROM " << nombreModelo << " WHERE username = ? AND password = ?');" << endl;
-    outputFile << "            $query->execute([$username, $password]);" << endl;
+    outputFile << "            $query->execute([";
+    for (int i = 3; i < contador - 1; i++)
+    {
+        if (i == contador - 1) // penutimo campo, sin coma
+        {
+            break;
+        } else if ( i == contador - 2)
+        {
+            outputFile << "$" + campos[i] + "";
+        }
+        else // Campos intermedios, con coma
+        {
+        outputFile << "$" + campos[i] + ", ";
+        }
+    }
+    outputFile <<"]);" << endl;
     outputFile << "            return $query->fetch(PDO::FETCH_ASSOC);" << endl;
     outputFile << "        } catch (PDOException $e) {" << endl;
     outputFile << "            throw new Exception('Error al validar usuario: ' . $e->getMessage());" << endl;
@@ -331,3 +423,4 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+
