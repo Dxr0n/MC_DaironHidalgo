@@ -16,10 +16,10 @@ El sistema de facturación tiene como objetivo facilitar la emisión, gestión y
 ## Capturas de pantalla
 
 ### Pantalla de gestión de usuarios
-![Gestión de usuarios](img/CapturaDePantallaModificarUsuario.png.png)
+![Gestión de usuarios](img/CapturaDePantallaModificarUsuario.png)
 
 ### Pantalla de inicio de sesión
-![Inicio de sesión](img/CapturaDePantallaLogin.png.png)
+![Inicio de sesión](img/CapturaDePantallaLogin.png)
 
 ## Tecnologías utilizadas
 
